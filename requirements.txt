@@ -10,10 +10,12 @@ idna==2.8
 isort==4.3.4
 oauthlib==3.0.1
 python-dateutil==2.8.1
+python-dotenv==0.20.0
 python-twitter==3.5
 requests==2.21.0
 requests-oauthlib==1.2.0
 six==1.15.0
 soupsieve==1.8
 toml==0.10.0
+twilio==7.12.1
 urllib3==1.24.2
