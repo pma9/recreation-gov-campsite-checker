@@ -1,5 +1,6 @@
 import os
 import sys
+import logging
 
 from enums.emoji import Emoji
 from twilio.rest import Client
@@ -15,7 +16,7 @@ def _send_sms(msg):
         from_=os.getenv("TWILIO_FROM_NUMBER"),
         body=msg,
     )
-    print("message sent with sid: " + message.sid)
+    logging.info("message sent with sid: " + message.sid)
 
 
 def generate_availability_strings(stdin):
@@ -32,6 +33,7 @@ def generate_availability_strings(stdin):
 
 def main(stdin):
     load_dotenv()
+    logging.basicConfig(format="%(asctime)s - %(message)s", level=logging.INFO)
 
     first_line = next(stdin)
     if "Something went wrong" in first_line:
@@ -42,9 +44,10 @@ def main(stdin):
 
     if available_site_strings:
         msg = first_line + "\n".join(available_site_strings)
+        logging.info(msg)
         _send_sms(msg)
     else:
-        print("No campsites available, not sending SMS")
+        logging.info("No campsites available, not sending SMS")
         sys.exit()
 
 
